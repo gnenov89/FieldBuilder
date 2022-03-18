@@ -16,9 +16,7 @@ body {
   margin: auto;
   padding: 0 20px;
 }
-.form-row {
-  text-align: center;
-}
+
 header {
   height: 70px;
   width: 100%;
@@ -55,6 +53,7 @@ header {
   background-color: #cccccc;
   color: #333;
   cursor: auto;
+  text: "disabled"
 }
 
 .btn:disabled:hover {
