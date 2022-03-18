@@ -78,8 +78,9 @@ function App() {
     let defAult = defValue.current.value
     if (!choices.includes(defAult)) {
       choices.push(defAult)
-      let defAdd = textAreaElement.current.value.concat(",", defValue.current.value)
+      let defAdd = textAreaElement.current.value.concat("\n", defValue.current.value)
       setFormValues({ ...formValues, choices: defAdd });
+      console.log(typeof formValues.choices)
     }
 
     MockService.saveField({ ...formValues, choices });
@@ -95,75 +96,77 @@ function App() {
 
   return (
     <>
-      <form id="fieldBuilderForm" onSubmit={submitFormToApi}>
-        <label htmlFor="salesRegion">Label</label>
-        <input
-          type="text"
-          id="salesRegion"
-          name="label"
-          ref={labelInput}
-          // value={formValues.label !== undefined && formValues.label}
-          onChange={handleFormChange}
-        ></input>
-        <br></br>
+      <div>
+        <form id="fieldBuilderForm" onSubmit={submitFormToApi}>
+          <label htmlFor="salesRegion">Label</label>
+          <input
+            type="text"
+            id="salesRegion"
+            name="label"
+            ref={labelInput}
+            // value={formValues.label !== undefined && formValues.label}
+            onChange={handleFormChange}
+          ></input>
+          <br></br>
 
-        {message && <div className="message">{message}</div>}
+          {message && <div className="message">{message}</div>}
 
-        <label htmlFor="Default Value">Default </label>
-        <input
-          ref={defValue}
-          type="text"
-          id="salesRegion"
-          name="default"
-          value={formValues.default}
-          onChange={handleFormChange}
-        ></input>
-        <br></br>
+          <label htmlFor="Default Value">Default </label>
+          <input
+            ref={defValue}
+            type="text"
+            id="salesRegion"
+            name="default"
+            value={formValues.default}
+            onChange={handleFormChange}
+          ></input>
+          <br></br>
 
-        <label htmlFor="MultiSelect">MultiSelect</label>
-        <input
-          ref={inputCheckbox}
-          type="checkbox"
-          id="MultiSelect"
-          name="multiSelect"
-          value={formValues.required}
-          onChange={handleFormChange}
-        ></input>
-        <br></br>
+          <label htmlFor="MultiSelect">MultiSelect</label>
+          <input
+            ref={inputCheckbox}
+            type="checkbox"
+            id="MultiSelect"
+            name="multiSelect"
+            value={formValues.required}
+            onChange={handleFormChange}
+          ></input>
+          <br></br>
 
-        <label htmlFor="formChoices">CHOICES</label>
-        <textarea
-          id="formChoices"
-          ref={textAreaElement}
-          rows={10}
-          name="choices"
-          defaultValue={
-            formValues.choices !== undefined
-              ? formValues.choices
-              : ""
-          }
-          onChange={handleFormChange}
-        ></textarea>
-        <br></br>
-
-
-
-        <label htmlFor="alphabetical">alphabetical</label>
-        <input
-          ref={alphaInput}
-          type="checkbox"
-          id="Alphabetical"
-          name="alphabetical"
-          value={formValues.displayAlpha}
-          onChange={handleFormChange}
-        ></input>
-        <br></br>
+          <label htmlFor="formChoices">CHOICES</label>
+          <textarea
+            id="formChoices"
+            ref={textAreaElement}
+            rows={10}
+            name="choices"
+            defaultValue={
+              formValues.choices !== undefined
+                ? formValues.choices
+                : ""
+            }
+            onChange={handleFormChange}
+          ></textarea>
+          <br></br>
 
 
-        <Button type="submit" onClick={submitFormToApi} isDisabled={btnDisabled}>SUBMIT</Button>
 
-        <Button type="reset" onClick={clearInputFields} version="secondary">CLEAR</Button>
-      </form>
+          <label htmlFor="alphabetical">alphabetical</label>
+          <input
+            ref={alphaInput}
+            type="checkbox"
+            id="Alphabetical"
+            name="alphabetical"
+            value={formValues.displayAlpha}
+            onChange={handleFormChange}
+          ></input>
+          <br></br>
+
+
+          <Button type="submit" onClick={submitFormToApi} isDisabled={btnDisabled}>SUBMIT</Button>
+
+          <Button type="reset" onClick={clearInputFields} version="secondary">CLEAR</Button>
+        </form>
+      </div>
     </>
   );
 }
